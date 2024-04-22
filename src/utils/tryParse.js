@@ -1,11 +1,20 @@
 import fs from "fs";
 
-export const tryParse = (path) => {
+const tryParse = (path) => {
+  let data;
   try {
-    const data = fs.readFileSync(path, "utf8");
+    data = fs.readFileSync(path, "utf8");
+  } catch (err) {
+    console.error("Problem with reading file");
+    return;
+  }
+
+  try {
     const parsedData = JSON.parse(data);
     return parsedData;
   } catch (err) {
-    console.log(err);
+    console.error("Problem with parsing JSON");
   }
 };
+
+export default tryParse;

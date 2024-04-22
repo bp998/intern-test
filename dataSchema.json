@@ -20,7 +20,8 @@
                 "type": "string"
               },
               "Effect": {
-                "type": "string"
+                "type": "string",
+                "enum": ["Allow", "Deny"]
               },
               "Action": {
                 "type": "array",
