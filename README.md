@@ -39,6 +39,11 @@ This project contains a method that verifies the input JSON data based on the AW
   }
 }
 ```
+## Tools Used
+- *Node.js:* The JavaScript runtime used to execute the project.
+- *Nodemon:* A utility that monitors for changes in your source and automatically restarts your server.
+- *Jest:* A JavaScript testing framework used for running tests.
+- *AJV:* A JSON schema validator used for validating JSON data.
 
 ## Logic in main file: index.js
 
