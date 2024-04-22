@@ -2,17 +2,16 @@ import fs from "fs";
 import Ajv from "ajv";
 
 export const validateSchema = (fileToValidate) => {
-  const schemaData = fs.readFileSync("dataSchema.json");
-  const schema = JSON.parse(schemaData);
+  const schema = JSON.parse(fs.readFileSync("dataSchema.json"));
 
   const ajv = new Ajv();
   const validate = ajv.compile(schema);
-  const valid = validate(fileToValidate);
+  const isValid = validate(fileToValidate);
 
-  if (!valid) {
+  if (!isValid) {
     console.log(validate.errors);
+    return false;
   } else {
-    console.log("Data is valid");
     return true;
   }
 };

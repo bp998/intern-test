@@ -1,26 +1,27 @@
 import fs from "fs";
-import { validateSchema } from "./schema.js";
+import { validateSchema } from "./utils/validateSchema.js";
+import { tryParse } from "./utils/tryParse.js";
+import { verifyPath } from "./utils/verifyPath.js";
 
 // path to json file
-const path = "data.json";
+const pathToJson = "data.json";
 
-const verifyJson = (path) => {
-  const parsedData = tryParse(path);
+// function to verify json
+const verifyJson = (filePath) => {
+  const pathExists = verifyPath(filePath);
+  if (!pathExists) {
+    return;
+  }
+  const parsedData = tryParse(filePath);
   const validated = validateSchema(parsedData);
   if (validated) {
     const resource = parsedData.PolicyDocument.Statement[0].Resource;
     const bool = resource === "*" ? false : true;
     console.log(bool);
     return bool;
+  } else {
+    console.log("Invalid JSON");
   }
 };
 
-const tryParse = (path) => {
-  try {
-    return JSON.parse(fs.readFileSync(path, "utf8"));
-  } catch (err) {
-    throw new Error("File not found");
-  }
-};
-
-verifyJson(path);
+verifyJson(pathToJson);
